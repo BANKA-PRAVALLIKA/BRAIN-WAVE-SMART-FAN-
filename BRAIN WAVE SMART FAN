@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainwave-Controlled Smart Fan | Banka Pravallika</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Brainwave-Controlled Smart Fan</h1>
+        <h3>By Banka Pravallika</h3>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home">
+        <h2>Welcome to the Future of Smart Fans!</h2>
+        <p>Control your fan using brainwaves with our innovative EEG-powered system.</p>
+    </section>
+    
+    <section id="features">
+        <h2>Key Features</h2>
+        <ul>
+            <li>🧠 Mind-Controlled Operation</li>
+            <li>⚡ Energy Efficient</li>
+            <li>📶 Wireless Connectivity</li>
+            <li>🔬 EEG Signal Processing</li>
+        </ul>
+    </section>
+    
+    <section id="demo">
+        <h2>Live Demo</h2>
+        <video width="600" controls>
+            <source src="demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
+    
+    <section id="how-it-works">
+        <h2>How It Works</h2>
+        <p>This smart fan uses an EEG headset to capture brainwave signals, an ESP32 microcontroller to process data, and a motor to control the fan speed accordingly.</p>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Have questions or want to collaborate? Reach out to me at <a href="mailto:your@email.com">your@email.com</a></p>
+        <p>View the full project on <a href="https://github.com/BANKA-PRAVALLIKA/BRAIN-WAVE-SMART-FAN-" target="_blank">GitHub</a></p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Brainwave Smart Fan | Created by Banka Pravallika</p>
+    </footer>
+</body>
+</html>
+
