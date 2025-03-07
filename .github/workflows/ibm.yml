@@ -1,0 +1,83 @@
+name: Deploy to IBM Cloud Kubernetes
+
+on:
+  push:
+    branches:
+      - main  # Runs when code is pushed to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Log in to IBM Cloud
+        run: |
+          ibmcloud login --apikey ${{ secrets.IBM_CLOUD_API_KEY }} -r us-south
+          ibmcloud cr region-set us-south
+
+      - name: Build Docker Image
+        run: |
+          docker build -t us.icr.io/YOUR_NAMESPACE/brainwave-smart-fan:latest .
+
+      - name: Push to IBM Cloud Container Registry
+        run: |
+          ibmcloud cr login
+          docker push us.icr.io/YOUR_NAMESPACE/brainwave-smart-fan:latest
+
+      - name: Deploy to IBM Kubernetes Cluster
+        run: |
+          ibmcloud ks cluster config --cluster YOUR_CLUSTER_ID
+          kubectl apply -f deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: brainwave-smart-fan
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: smartfan
+  template:
+    metadata:
+      labels:
+        app: smartfan
+    spec:
+      containers:
+        - name: smartfan
+          image: us.icr.io/YOUR_NAMESPACE/brainwave-smart-fan:latest
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: smartfan-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: smartfan
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+# Use Node.js as base image (Change if using a different framework)
+FROM node:16
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Copy all project files
+COPY . .
+
+# Expose port
+EXPOSE 80
+
+# Start the application
+CMD ["npm", "start"]
